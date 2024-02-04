@@ -7,15 +7,10 @@ const EventEmitter = require("events");
 class FileMonitor extends EventEmitter {
   constructor(
     dirPath,
-    serverUrl,
-    authCredentials = null,
-    throttleDelay = 1000
   ) {
     super(); // Call EventEmitter constructor
     this.dirPath = dirPath;
-    this.serverUrl = serverUrl;
-    this.throttleDelay = throttleDelay;
-    this.authCredentials = authCredentials;
+    this.throttleDelay = 1000;
     this.pushedFilesPath = path.join(this.dirPath, "pushedFiles.json");
     this.pushedFiles = this.loadPushedFiles();
     this.fileQueue = [];
@@ -111,16 +106,17 @@ class FileMonitor extends EventEmitter {
 
   setAuthCredentials(authCredentials) {
     this.authCredentials = authCredentials;
-    if (!this.isStarted) {
-      this.start();
-    }
+  }
+
+  setSeedServer(postEndpoint) {
+    this.serverUrl = postEndpoint;
   }
 
   async start() {
     this.isStarted = true;
 
     const waitForAuth = () => {
-      if (!this.authCredentials) {
+      if (!this.authCredentials || !this.serverUrl) {
         console.log("Waiting for authentication credentials...");
         setTimeout(waitForAuth, 30000); // Check again in 30 seconds
       } else {

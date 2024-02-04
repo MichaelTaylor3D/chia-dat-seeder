@@ -32,6 +32,7 @@ declare module "chia-dat-seeder" {
     );
 
     setAuthCredentials(authCredentials: AuthCredentials): void;
+    setSeedServer(postEndpoint: string): void;
     start(): Promise<void>;
     on(
       event: "queueLengthChanged",
