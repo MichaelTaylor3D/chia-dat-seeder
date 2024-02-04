@@ -8,8 +8,8 @@ class FileMonitor extends EventEmitter {
   constructor(
     dirPath,
     serverUrl,
-    throttleDelay = 1000,
-    authCredentials = null
+    authCredentials = null,
+    throttleDelay = 1000
   ) {
     super(); // Call EventEmitter constructor
     this.dirPath = dirPath;

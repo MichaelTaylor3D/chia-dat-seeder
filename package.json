@@ -1,8 +1,9 @@
 {
   "name": "chia-dat-seeder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module to monitor a directory for new .dat files and push them to a always on DataLayer mirror.",
   "main": "src/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

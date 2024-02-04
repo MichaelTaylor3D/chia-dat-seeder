@@ -31,14 +31,13 @@ declare module "chia-dat-seeder" {
       authCredentials?: AuthCredentials | null
     );
 
-    loadPushedFiles(): Record<string, boolean>;
-    savePushedFile(filename: string): void;
-    queueFile(filePath: string): void;
-    processQueue(): Promise<void>;
-    pushFile(filePath: string): Promise<void>;
     setAuthCredentials(authCredentials: AuthCredentials): void;
     start(): Promise<void>;
-    beginMonitoring(): Promise<void>;
+    on(
+      event: "queueLengthChanged",
+      listener: (newLength: number) => void
+    ): this;
+    removeAllListeners(event?: string): this;
   }
 
   export = FileMonitor;
